@@ -1,0 +1,23 @@
+.error--container {
+    padding: 30px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.error--message {
+    font-size: 3rem;
+    line-height: 42px;
+}
+
+.error--button {
+    width: 50vw;
+    height: 8vh;
+    border-radius: 4.983px;
+    background: #161616;
+    color: white;
+    font-size: 2rem;
+}

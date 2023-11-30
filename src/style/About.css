@@ -1,0 +1,56 @@
+
+.about--main--bgimage {
+    width: 100%;
+}
+
+.about--main--container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.about--main--text {
+    font-size: 3rem;
+    max-width: 75vw;
+}
+
+.about--main--subtext {
+    font-size: 1rem;
+    max-width: 75vw;
+}
+
+.about--explore--container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    gap: 30px;
+    width: 75vw;
+    height: 200px;
+    border-radius: 5px;
+    background: #FFCC8D;
+}
+
+.about--explore--container > a{
+    text-decoration: none;
+}
+
+.about--explore--text {
+    font-size: 1.5rem;
+}
+
+.about--explore--button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    background: #161616;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+}
+

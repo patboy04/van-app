@@ -1,0 +1,191 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.host--navbar {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 0px 20px;
+}
+
+.host--navbar > a {
+    color: black;
+    text-decoration: none;
+}
+
+.host--navbar > a:hover {
+    text-decoration: underline;
+}
+
+.host--title-header {
+    padding: 20px 30px;
+}
+
+.host--vans-grid {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 110px;
+    grid-row-gap: 60px;
+}
+
+.host--vans-container{
+    display: flex;
+    align-self: center;
+    background-color: white;
+    border-radius: 6px;
+    width: 400px;
+    height: 100px;
+}
+
+.host--vans-img{
+    max-width: 100%;
+}
+
+.host--vans-text-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 10px;
+    gap: 5px;
+}
+
+.host--vans-text-container > p {
+    margin: 0px;
+    color: black;
+}
+
+.host--vans-detail-container {
+    background-color: white;
+    width: 80vw;
+    height: 60vh;
+    margin: auto;
+    padding: 30px;
+}
+
+.host--vans-detail-container > a{
+    font-size: 1.4rem;
+    color: black;
+}
+
+.host--vans-detail-flex {
+    display: flex;
+    height: 90%;
+}
+
+.host--vans-detail-flex > img{
+    object-fit: cover;
+    width: 30%;
+    display: block;
+}
+
+.host-vans-detail-text-container {
+    padding: 0px 50px;
+    font-size: 1.5rem;
+}
+
+.host-vans-detail-text-container > button{
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    background: #E17654;
+    color: #FFEAD0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.host--vans-detail-wrapper {
+    margin: 0px 50px;
+}
+
+.host--vans-detail-navbar {
+    display: flex;
+    font-size: 1.5rem;
+    gap: 20px;
+}
+
+.host--vans-details-info-container {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    font-size: 1.1rem;
+    max-width: 400px;
+}
+
+.host--vans-details-info-container > img{
+    width: 30%;
+}
+
+@media only screen and (max-width: 1450px) {
+    .host--vans-detail-flex > img{
+        width: 200px;
+        height: 100%;
+    }
+    
+    .host-vans-detail-text-container {
+        padding: 0px 30px;
+        font-size: 1rem;
+    }
+    
+    .host-vans-detail-text-container > button{
+        font-size: 1rem;
+    }
+
+    .host--vans-details-info-container {
+        font-size: 1rem;
+        max-width: 300px;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .host--vans-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+    }
+}
+
+@media only screen and (max-width: 945px) {
+    .host--vans-grid {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(9, 1fr);
+    }
+
+    .host--vans-detail-navbar {
+        font-size: 1rem;
+
+    }
+    .host--vans-detail-container {
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 60vw;
+        height: auto;
+    }
+
+    .host--vans-detail-flex{
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+    }
+    
+    .host--vans-detail-flex > img{
+        width: 80%;
+        height: 80%;
+    }
+    
+    .host-vans-detail-text-container {
+        padding: 20px 30px;
+        font-size: 0.7rem;
+    }
+    
+    .host-vans-detail-text-container > button{
+        font-size: 0.7rem;
+    }
+
+    .host--vans-details-info-container {
+        font-size: 0.7rem;
+    }
+}

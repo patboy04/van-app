@@ -1,0 +1,206 @@
+/* VANS.JSX CSS*/
+
+.explore--text {
+    font-size: 3rem;
+    padding: 30px;
+}
+
+.explore--container {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    gap: 30px;
+    padding: 0px 30px;
+}
+
+.explore--button {
+    border-radius: 5px;
+    background: #FFEAD0;
+    color: #4D4D4D;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100px;
+    height: 40px;
+}
+
+.explore--button:hover {
+    cursor: pointer;
+    background: #FF622E;
+}
+
+.explore--filter {   
+    text-decoration: underline;
+}
+
+.center {
+    display: grid;
+    justify-content: center;
+}
+
+.van--container {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 70px;
+    grid-row-gap: 40px;
+}
+
+.van--container > a {
+    text-decoration: none;
+    color: black;
+}
+
+/* VAN.JSX COMPONENT CSS*/
+
+.van--component {
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.van--text--container {
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.van--name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.van--price {
+    margin-left: auto;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.van--button {
+    width: 85px;
+    height: 35px;
+    border-radius: 5px;
+    background: #E17654;
+    color: #FFEAD0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* VANDETAILS.JSX CSS*/
+
+.previous {
+    margin: 0;
+    padding: 0px 20px;
+    font-size: 1.2rem;
+    text-decoration: underline;
+    color: black;
+}
+
+.vandetails--container {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.vandetails--img {
+    height: 70vh;
+}
+
+.vandetails--textcontainer {
+    padding: 50px;
+    height: 70vh;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.vandetails--name {
+    font-size: 3rem;
+}
+
+.vandetails--price {
+    font-size: 1.5rem;
+}
+
+.vandetails--desc {
+    font-size: 1rem;
+}
+
+.vandetails--button {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+}
+
+
+/* VANs.JSX MEDIA QUERY*/
+@media only screen and (max-width: 810px) {
+    .explore--text {
+        font-size: 2rem;
+    }
+
+    .van--container {
+        padding: 0px 30px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        grid-column-gap: 50px;
+        grid-row-gap: 20px;
+    }
+
+    .van--component {
+        width: 40vw;
+    }
+
+    .van--name {
+        font-size: 1rem;
+    }
+
+    .van--price {
+        font-size: 1rem;
+    }
+
+    .van--button {
+        font-size: 0.9rem;
+    }
+}
+
+/* VANDETAILS.JSX MEDIA QUERY*/
+@media only screen and (max-width: 985px) {
+    .vandetails--container {
+        padding: 10px;
+        flex-direction: column;
+    }
+
+    .vandetails--img {
+        max-width: 100%;
+    }
+    
+    .vandetails--textcontainer {
+        padding: 10px 10px;
+        height: 70vh;
+    }
+
+    .vandetails--name {
+        font-size: 2rem;
+    }
+    
+    .vandetails--price {
+        font-size: 1rem;
+    }
+    
+    .vandetails--desc {
+        font-size: 0.8rem;
+    }
+    
+    .vandetails--button {
+        font-size: 1rem;
+    }
+
+}
