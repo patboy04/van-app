@@ -1,16 +1,24 @@
 import React, {useState, useEffect} from "react"
+import { useLoaderData } from "react-router-dom"
 import VanList from "../../component/VanList.jsx"
+import { getHostVans } from "../../api.js"
 import "../../style/Host.css"
 
+export function loader() {
+    return getHostVans()
+}
+
 export default function HostVans() {
-
-    const [vanList, setVanList] = useState([])
-
-    useEffect(() => {
-        fetch("/api/host/vans")
-            .then(res => res.json())
-            .then(data => setVanList(data.vans))
-    }, [])
+    const data = useLoaderData()
+    const vanList = data.vans
+    
+    //const [vanList, setVanList] = useState([])
+    
+    // useEffect(() => {
+    //     fetch("/api/host/vans")
+    //         .then(res => res.json())
+    //         .then(data => setVanList(data.vans))
+    // }, [])
 
     const renderVansList = vanList.map(van => (
         <VanList 

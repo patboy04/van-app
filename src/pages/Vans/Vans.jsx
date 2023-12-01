@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLoaderData } from "react-router-dom";
 import Van from "../../component/Van.jsx"
 import { getVans } from "../../api.js"
 import "../../style/Vans.css"
 
-export default function Vans() {
+export function loader() {
+    return getVans()
+}
 
-    const [vans, setVans] = useState([])
+export default function Vans() {
     const [searchParams, setSearchParams] = useSearchParams() //?query of url
-    const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
+    const vans = useLoaderData()
 
     const typeFilter = searchParams.get("type")
     
@@ -25,25 +27,6 @@ export default function Vans() {
         backgroundColor: typeFilter === "luxury" ? "#161616" : "",
         color: typeFilter === "luxury" ? "white" : ""
     }
-
-    useEffect(() => {
-        async function loadVans() {
-            setLoading(true)
-            try {
-                const data = await getVans()
-                setVans(data)
-            }
-            catch(err) {
-                setError(err)
-            }
-            finally {
-                setLoading(false)
-            }
-            
-        }
-        loadVans()
-
-    }, [])
 
     const filteredVans = typeFilter 
         ? vans.filter(van => van.type === typeFilter)
@@ -61,10 +44,6 @@ export default function Vans() {
             searchParams={searchParams.toString()}
         />
     ))
-
-    if(loading) {
-        return <h1>Loading...</h1>
-    }
 
     if(error) {
         return <h1>{error.message}</h1>

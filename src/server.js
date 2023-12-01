@@ -18,7 +18,8 @@ createServer({
     },
 
     routes() {
-        this.namespace = "api"
+        //this.namespace = "api"
+        this.urlPrefix = 'http://localhost:5173/*'
         this.logging = false
 
         this.get("/vans", (schema, request) => {
