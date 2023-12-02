@@ -5,8 +5,8 @@ export default function Login() {
     const [formData, setFormData] = useState({email: "", password: ""})
 
     function handleSubmit(event) {
-        e.preventDefault()
-        console.log(loginFormData)
+        event.preventDefault()
+        console.log(formData)
     }
 
     function handleChange(event) {
@@ -22,14 +22,14 @@ export default function Login() {
             <h1>Sign in to your account</h1>
             <form onSubmit={handleSubmit} className="login--form--container">
                 <input
-                    email="email"
+                    name="email"
                     type="text"
                     placeholder="email"
                     value={formData.email}
                     onChange={handleChange}
                 />
                 <input
-                    email="password"
+                    name="password"
                     type="text"
                     placeholder="password"
                     value={formData.password}

@@ -4,7 +4,7 @@ import Van from "../../component/Van.jsx"
 import { getVans } from "../../api.js"
 import "../../style/Vans.css"
 
-export function loader() {
+export async function loader() {
     return getVans()
 }
 

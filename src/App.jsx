@@ -17,6 +17,7 @@ import HostVansPhoto from "./pages/Host/HostVansDetail/HostVansPhoto.jsx";
 import HostVansPrice from "./pages/Host/HostVansDetail/HostVansPrice.jsx";
 import NotFound from "./pages/Error/NotFound.jsx";
 import Error from "./pages/Error/Error.jsx";
+import { authenticateUser } from "./utils.js"; 
 import "./server" 
 
 export default function App() {
@@ -28,16 +29,16 @@ export default function App() {
             <Route path="login" element={<Login />}/>
             <Route path="vans" element={<Vans />} loader={vansLoader} errorElement={<Error />}/>
             <Route path="vans/:id" element={<VanDetail />} loader={vanDetailsLoader}/>
-            <Route path="host" element={<HostLayout />} errorElement={<Error />} loader={async()=>{return null}}>
-                <Route index element={<Dashboard/>} loader={async()=>{return null}}/>
-                <Route path="income" element={<Income />} loader={async()=>{return null}}/>
+            <Route path="host" element={<HostLayout />} errorElement={<Error />} loader={async()=>await authenticateUser()}>
+                <Route index element={<Dashboard/>} loader={async()=>await authenticateUser()}/>
+                <Route path="income" element={<Income />} loader={async()=>await authenticateUser()}/>
                 <Route path="vans" element={<HostVans />} loader={hostVansLoader} />
                 <Route path="vans/:id" element={<HostVansDetail />} loader={hostVansDetailsLoader}>
-                    <Route index element={<HostVansInfo />} loader={async()=>{return null}} />
-                    <Route path="pricing" element={<HostVansPrice />} loader={async()=>{return null}} />
-                    <Route path="photos" element={<HostVansPhoto />} loader={async()=>{return null}} />
+                    <Route index element={<HostVansInfo />} loader={async()=>await authenticateUser()} />
+                    <Route path="pricing" element={<HostVansPrice />} loader={async()=>await authenticateUser()} />
+                    <Route path="photos" element={<HostVansPhoto />} loader={async()=>await authenticateUser()} />
                 </Route>
-                <Route path="reviews" element={<Reviews />} loader={async()=>{return null}}/>
+                <Route path="reviews" element={<Reviews />} loader={async()=>{await authenticateUser()}}/>
             </Route>
             <Route path="*" element={<NotFound />}/>
         </Route>              

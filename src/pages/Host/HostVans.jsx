@@ -2,9 +2,11 @@ import React, {useState, useEffect} from "react"
 import { useLoaderData } from "react-router-dom"
 import VanList from "../../component/VanList.jsx"
 import { getHostVans } from "../../api.js"
+import { authenticateUser } from "../../utils.js"
 import "../../style/Host.css"
 
-export function loader() {
+export async function loader() {
+    await authenticateUser()
     return getHostVans()
 }
 

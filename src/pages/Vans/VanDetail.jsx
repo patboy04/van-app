@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams, useLocation, useLoaderData } from "react-router-dom"
 import { getVans } from "../../api";
 
-export function loader({params}) {
+export async function loader({params}) {
     return getVans(params.id)
 }
 
