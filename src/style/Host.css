@@ -79,6 +79,7 @@ a {
 .host--vans-detail-flex > img{
     object-fit: cover;
     width: 30%;
+    height: 100%;
     display: block;
 }
 
@@ -119,15 +120,15 @@ a {
     width: 30%;
 }
 
-@media only screen and (max-width: 1450px) {
+@media only screen and (max-width: 1300px) {
     .host--vans-detail-flex > img{
-        width: 200px;
-        height: 100%;
+        width: 30vw;
+        height: 35vh;
     }
     
     .host-vans-detail-text-container {
-        padding: 0px 30px;
-        font-size: 1rem;
+        padding: 0px 10px;
+        font-size: 0.8rem;
     }
     
     .host-vans-detail-text-container > button{
@@ -151,6 +152,11 @@ a {
     .host--vans-grid {
         grid-template-columns: repeat(1, 1fr);
         grid-template-rows: repeat(9, 1fr);
+    }
+
+    .host--vans-container{
+        width: 80vw;
+        height: 100px;
     }
 
     .host--vans-detail-navbar {

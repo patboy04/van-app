@@ -27,8 +27,6 @@ export default function HostVansDetail() {
         color: "#161616"
     }
 
-    if(!vanDetails) return <div></div>
-
     return (
     <div className="host--vans-detail-container">
         <Link to=".." relative="path"> &larr;</Link>

@@ -88,6 +88,7 @@ nav {
 
 .login--form--container > button{
     font-size: 1rem;
+    height: 5vh;
     color: white;
 }
 
@@ -113,6 +114,15 @@ footer {
 }
 
 @media only screen and (max-width: 600px) {
+
+    .navbar--links--container {
+        gap: 10px;
+    }
+
+    .navbar--links--container > a {
+        font-size: 10px;
+    }
+
     .login--container{
         font-size: 1rem;
     }
