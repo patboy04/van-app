@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route} f
 import PageLayout from "./component/PageLayout.jsx"
 import Home from "./pages/Home.jsx"
 import About from "./pages/About.jsx"
+import Login from "./pages/Login.jsx";
 import Vans, { loader as vansLoader } from "./pages/Vans/Vans.jsx"
 import VanDetail from "./pages/Vans/VanDetail.jsx";
 import HostLayout from "./component/HostLayout.jsx";
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/"element={<PageLayout />}>
             <Route index element={<Home />}/>
             <Route path="about" element={<About />}/>
+            <Route path="login" element={<Login />}/>
             <Route path="vans" element={<Vans />} loader={vansLoader} errorElement={<Error />}/>
             <Route path="vans/:id" element={<VanDetail />}/>
             <Route path="host" element={<HostLayout />} errorElement={<Error />}>

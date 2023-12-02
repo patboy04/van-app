@@ -20,6 +20,7 @@ createServer({
     routes() {
         //this.namespace = "api"
         this.urlPrefix = 'http://localhost:5173/*'
+        //this.urlPrefix = 'https://vanlife-app-patrick.netlify.app/*'
         this.logging = false
 
         this.get("/vans", (schema, request) => {
