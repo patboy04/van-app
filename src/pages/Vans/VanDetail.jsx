@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useLocation } from "react-router-dom"
+import { Link, useParams, useLocation, useLoaderData } from "react-router-dom"
+import { getVans } from "../../api";
+
+export function loader({params}) {
+    return getVans(params.id)
+}
 
 export default function VanDetail() {
-    const [vanDetails, setVanDetails] = useState([])
-    const params = useParams() //gets params from current url
+    const vanDetails = useLoaderData()
     const location = useLocation() //gets data from current url and previous state
 
     const prevParams = location.state?.searchParams || ""
-
-    useEffect(() => {
-        fetch(`/api/vans/${params.id}`)
-            .then(res => res.json())
-            .then(data => setVanDetails(data.vans))
-    }, [params.id])
 
     const buttonColor = {
         backgroundColor: 

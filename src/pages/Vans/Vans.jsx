@@ -45,9 +45,9 @@ export default function Vans() {
         />
     ))
 
-    if(error) {
-        return <h1>{error.message}</h1>
-    }
+    // if(vans.length = 0) {
+    //     return <h1>{error.message}</h1>
+    // }
 
     /* 
         function genNewSearchParamString(key, value) {

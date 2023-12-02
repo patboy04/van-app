@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react"
-import { Link, useParams, Outlet, NavLink } from "react-router-dom"
+import { Link, useParams, Outlet, NavLink, useLoaderData } from "react-router-dom"
+import { getHostVans } from "../../api"
+
+export function loader({params}) {
+    return getHostVans(params.id)
+}
 
 export default function HostVansDetail() {
-
-    const [vanDetails, setVanDetails] = useState(null)
-    const {id} = useParams();
+    const vanDetails = useLoaderData()
 
     const buttonColor = {
         backgroundColor: vanDetails === null 
@@ -23,12 +26,6 @@ export default function HostVansDetail() {
         textDecoration: "underline",
         color: "#161616"
     }
-
-    useEffect(() => {
-        fetch(`/api/host/vans/${id}`)
-            .then(res => res.json())
-            .then(data => setVanDetails(data.vans))
-    }, [])
 
     if(!vanDetails) return <div></div>
 

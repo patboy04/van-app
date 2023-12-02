@@ -5,13 +5,13 @@ import Home from "./pages/Home.jsx"
 import About from "./pages/About.jsx"
 import Login from "./pages/Login.jsx";
 import Vans, { loader as vansLoader } from "./pages/Vans/Vans.jsx"
-import VanDetail from "./pages/Vans/VanDetail.jsx";
+import VanDetail, {loader as vanDetailsLoader} from "./pages/Vans/VanDetail.jsx";
 import HostLayout from "./component/HostLayout.jsx";
 import Dashboard from "./pages/Host/Dashboard.jsx";
 import Reviews from "./pages/Host/Reviews.jsx"
 import Income from "./pages/Host/Income.jsx"
 import HostVans, { loader as hostVansLoader } from "./pages/Host/HostVans.jsx";
-import HostVansDetail from "./pages/Host/HostVansDetail.jsx"
+import HostVansDetail, { loader as hostVansDetailsLoader } from "./pages/Host/HostVansDetail.jsx"
 import HostVansInfo from "./pages/Host/HostVansDetail/HotVansInfo.jsx";
 import HostVansPhoto from "./pages/Host/HostVansDetail/HostVansPhoto.jsx";
 import HostVansPrice from "./pages/Host/HostVansDetail/HostVansPrice.jsx";
@@ -27,17 +27,17 @@ export default function App() {
             <Route path="about" element={<About />}/>
             <Route path="login" element={<Login />}/>
             <Route path="vans" element={<Vans />} loader={vansLoader} errorElement={<Error />}/>
-            <Route path="vans/:id" element={<VanDetail />}/>
-            <Route path="host" element={<HostLayout />} errorElement={<Error />}>
-                <Route index element={<Dashboard/>}/>
-                <Route path="income" element={<Income />}/>
+            <Route path="vans/:id" element={<VanDetail />} loader={vanDetailsLoader}/>
+            <Route path="host" element={<HostLayout />} errorElement={<Error />} loader={async()=>{return null}}>
+                <Route index element={<Dashboard/>} loader={async()=>{return null}}/>
+                <Route path="income" element={<Income />} loader={async()=>{return null}}/>
                 <Route path="vans" element={<HostVans />} loader={hostVansLoader} />
-                <Route path="vans/:id" element={<HostVansDetail />}>
-                    <Route index element={<HostVansInfo />} />
-                    <Route path="pricing" element={<HostVansPrice />} />
-                    <Route path="photos" element={<HostVansPhoto />} />
+                <Route path="vans/:id" element={<HostVansDetail />} loader={hostVansDetailsLoader}>
+                    <Route index element={<HostVansInfo />} loader={async()=>{return null}} />
+                    <Route path="pricing" element={<HostVansPrice />} loader={async()=>{return null}} />
+                    <Route path="photos" element={<HostVansPhoto />} loader={async()=>{return null}} />
                 </Route>
-                <Route path="reviews" element={<Reviews />}/>
+                <Route path="reviews" element={<Reviews />} loader={async()=>{return null}}/>
             </Route>
             <Route path="*" element={<NotFound />}/>
         </Route>              

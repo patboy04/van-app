@@ -9,16 +9,7 @@ export function loader() {
 }
 
 export default function HostVans() {
-    const data = useLoaderData()
-    const vanList = data.vans
-    
-    //const [vanList, setVanList] = useState([])
-    
-    // useEffect(() => {
-    //     fetch("/api/host/vans")
-    //         .then(res => res.json())
-    //         .then(data => setVanList(data.vans))
-    // }, [])
+    const vanList = useLoaderData()
 
     const renderVansList = vanList.map(van => (
         <VanList 
