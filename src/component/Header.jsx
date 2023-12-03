@@ -10,6 +10,10 @@ export default function Header() {
         color: "#161616"
     }
 
+    function fakeLogOut() {
+        localStorage.removeItem("loggedIn")
+    }
+
     return (
         <nav>
             <NavLink to="." className="navbar--title">#VANLIFE</NavLink>
@@ -18,6 +22,7 @@ export default function Header() {
                 <NavLink to="about" style={({isActive})=>isActive ? activeLink : null}>About</NavLink>
                 <NavLink to="vans" style={({isActive})=>isActive ? activeLink : null}>Vans</NavLink>
                 <NavLink to="login"><img src={profileIcon} className="user--icon" /></NavLink>
+                <button onClick={fakeLogOut}>X</button>
             </div>
         </nav>
     )

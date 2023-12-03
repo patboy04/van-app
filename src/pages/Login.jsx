@@ -1,42 +1,67 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
+import { useLoaderData, Form, redirect, useNavigate } from "react-router-dom"
+import { loginUser } from "../api"
 import "../style/style.css"
 
+export function loader({ request }) {
+    return new URL(request.url).searchParams.get("message")
+}
+
+export async function action({ request }) {
+    const formData = await request.formData()
+    const email = formData.get("email")
+    const password = formData.get("password")
+    try {
+        const data = await loginUser({email, password})
+        localStorage.setItem("loggedIn", true)
+        const res = redirect("/host")
+        res.body = true;
+        return res
+    } catch(err) {
+        console.log(err.message)
+        return err.message
+    }
+    
+}
+
 export default function Login() {   
-    const [formData, setFormData] = useState({email: "", password: ""})
+    const [status, setStatus] = useState("idle")
+    const [error, setError] = useState(null)
+    const message = useLoaderData()
+    const navigate = useNavigate()
 
     function handleSubmit(event) {
         event.preventDefault()
-        console.log(formData)
-    }
-
-    function handleChange(event) {
-        const  {name, value} = event.target
-        setFormData(prevForm => ({
-            ...prevForm,
-            [name]: value 
-        }))
+        setStatus("submitting")
+        setError(null)
+        loginUser(formData)
+            .then(data => {
+                navigate("/host", { replace: true })
+            })
+            .catch(err => setError(err))
+            .finally(() => setStatus("idle"))
     }
 
     return (
         <div className="login--container">
             <h1>Sign in to your account</h1>
-            <form onSubmit={handleSubmit} className="login--form--container">
+            { message && <h3>{message}</h3> }
+            { error && <h3>{error.message}</h3> }
+            <Form method="post" className="login--form--container">
                 <input
                     name="email"
                     type="text"
                     placeholder="email"
-                    value={formData.email}
-                    onChange={handleChange}
                 />
                 <input
                     name="password"
                     type="text"
                     placeholder="password"
-                    value={formData.password}
-                    onChange={handleChange}
                 />
-                <button className="home--main--button">Log in</button>
-            </form>
+                <button disabled={status === "submitting"} className="home--main--button">
+                    {status === "submitting" ? "Logging in" : "Log in"}
+                </button>
+            </Form>
         </div>
     )
 }
