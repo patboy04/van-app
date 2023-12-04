@@ -5,8 +5,8 @@ import { getHostVans } from "../../api.js"
 import { authenticateUser } from "../../utils.js"
 import "../../style/Host.css"
 
-export async function loader() {
-    await authenticateUser()
+export async function loader({ request }) {
+    await authenticateUser(request)
     return getHostVans()
 }
 

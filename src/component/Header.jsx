@@ -1,9 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import profileIcon from "../assets/user.png"
 
 export default function Header() {
-
     const activeLink = {
         fontWeight: "bold",
         textDecoration: "underline",
@@ -21,7 +20,7 @@ export default function Header() {
                 <NavLink to="host" style={({isActive})=>isActive ? activeLink : null}>Host</NavLink>
                 <NavLink to="about" style={({isActive})=>isActive ? activeLink : null}>About</NavLink>
                 <NavLink to="vans" style={({isActive})=>isActive ? activeLink : null}>Vans</NavLink>
-                <NavLink to="login"><img src={profileIcon} className="user--icon" /></NavLink>
+                <NavLink to="login" ><img src={profileIcon} className="user--icon" /></NavLink>
                 <button onClick={fakeLogOut}>X</button>
             </div>
         </nav>
