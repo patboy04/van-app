@@ -114,6 +114,7 @@
 
 .vandetails--textcontainer {
     padding: 50px;
+    gap: 20px;
     height: auto;
     display: flex;
     flex-direction: column;

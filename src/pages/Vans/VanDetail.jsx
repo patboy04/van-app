@@ -1,29 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useLocation, useLoaderData } from "react-router-dom"
+import React, { Suspense } from "react";
+import { Link, useLocation, useLoaderData, defer, Await } from "react-router-dom"
+import Loading from "../../component/Loading.jsx"
 import { getVans } from "../../api";
 
 export async function loader({params}) {
-    return getVans(params.id)
+    const vanDetailsPromise = getVans(params.id)
+    return defer({vanDetails: vanDetailsPromise})
 }
 
 export default function VanDetail() {
-    const vanDetails = useLoaderData()
+    const loaderData = useLoaderData()
     const location = useLocation() //gets data from current url and previous state
 
     const prevParams = location.state?.searchParams || ""
 
-    const buttonColor = {
-        backgroundColor: 
-            vanDetails.type === "simple" 
-                ? "" 
-                : vanDetails.type === "rugged"
-                ? "#115E59"
-                : "#161616"
-    }
+    function renderVanDetailsElements(vanDetails) {
+        const buttonColor = {
+            backgroundColor: 
+                vanDetails.type === "simple" 
+                    ? "" 
+                    : vanDetails.type === "rugged"
+                    ? "#115E59"
+                    : "#161616"
+        }
 
-    return (
-        <div>
-            {vanDetails.id ? (
+        return (
             <>
                 <Link to={`..?${prevParams}`} relative="path">
                     <p className="previous round">&#8249; Back to {prevParams ? prevParams.substring(5) : "all"} vans</p>
@@ -42,7 +43,18 @@ export default function VanDetail() {
                         </button>
                     </div>   
                 </div>  
-            </> ) : <h1></h1>}
+            </>
+        )
+    
+    }
+
+    return (
+        <div>
+            <Suspense fallback={<Loading />}>
+                <Await resolve={loaderData.vanDetails}>
+                    {renderVanDetailsElements}
+                </Await>
+            </Suspense>
         </div>
     )
 

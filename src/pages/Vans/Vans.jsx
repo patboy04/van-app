@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { Link, useSearchParams, useLoaderData } from "react-router-dom";
+import React, { useState, Suspense } from "react";
+import { Link, useSearchParams, useLoaderData, defer, Await } from "react-router-dom";
+import Loading from "../../component/Loading.jsx";
 import Van from "../../component/Van.jsx"
 import { getVans } from "../../api.js"
 import "../../style/Vans.css"
 
 export async function loader() {
-    return getVans()
+    const vansPromise = getVans()
+    return defer({vans: vansPromise})
 }
 
 export default function Vans() {
     const [searchParams, setSearchParams] = useSearchParams() //?query of url
-    const [error, setError] = useState(null)
-    const vans = useLoaderData()
+    //const [error, setError] = useState(null)
+    const loaderData = useLoaderData()
 
     const typeFilter = searchParams.get("type")
     
@@ -28,26 +30,49 @@ export default function Vans() {
         color: typeFilter === "luxury" ? "white" : ""
     }
 
-    const filteredVans = typeFilter 
+    function renderVansElements(vans) {
+        const filteredVans = typeFilter 
         ? vans.filter(van => van.type === typeFilter)
         : vans
 
-    const renderVans = filteredVans.map(van => (
-        <Van 
-            key={van.id}
-            id={van.id}
-            name={van.name}
-            price={van.price}
-            type={van.type}
-            description={van.description}
-            image={van.imageUrl}
-            searchParams={searchParams.toString()}
-        />
-    ))
+        const renderVans = filteredVans.map(van => (
+            <Van 
+                key={van.id}
+                id={van.id}
+                name={van.name}
+                price={van.price}
+                type={van.type}
+                description={van.description}
+                image={van.imageUrl}
+                searchParams={searchParams.toString()}
+            />
+        ))
 
-    // if(vans.length = 0) {
-    //     return <h1>{error.message}</h1>
-    // }
+        return (
+            <>
+                <div className="explore--container">
+                    <button onClick={() => setSearchParams(
+                        {type: "simple"})}className="explore--button" style={simpleColor}>
+                        Simple
+                    </button>
+                    <button onClick={() => setSearchParams(
+                        {type: "luxury"})}className="explore--button" style={luxuryColor}>
+                        Luxury
+                    </button>
+                    <button onClick={() => setSearchParams(
+                        {type: "rugged"})}className="explore--button" style={ruggedColor}>
+                        Rugged
+                    </button>
+                    {typeFilter !== null && <Link to=""><p className="explore--filter">Clear Filters</p></Link>}
+                </div>
+                <div className="center">
+                    <div className="van--container">
+                        {renderVans}
+                    </div>
+                </div>
+            </>
+        )
+    }
 
     /* 
         function genNewSearchParamString(key, value) {
@@ -75,23 +100,11 @@ export default function Vans() {
     return (
         <div>
             <h1 className="explore--text">Explore our van options</h1>
-            <div className="explore--container">
-                <button onClick={() => setSearchParams({type: "simple"})}className="explore--button" style={simpleColor}>
-                    Simple
-                </button>
-                <button onClick={() => setSearchParams({type: "luxury"})}className="explore--button" style={luxuryColor}>
-                    Luxury
-                </button>
-                <button onClick={() => setSearchParams({type: "rugged"})}className="explore--button" style={ruggedColor}>
-                    Rugged
-                </button>
-                {typeFilter !== null && <Link to=""><p className="explore--filter">Clear Filters</p></Link>}
-            </div>
-            <div className="center">
-                <div className="van--container">
-                    {renderVans}
-                </div>
-            </div>
+            <Suspense fallback={<Loading />}>
+                <Await resolve={loaderData.vans}>
+                    {renderVansElements}
+                </Await>
+            </Suspense>
         </div>
     )
     

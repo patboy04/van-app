@@ -96,6 +96,15 @@ nav {
     color: white;
 }
 
+.loading--container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 70vh;
+}
+
 footer {
     height: 5vh;
     background: #252525;
