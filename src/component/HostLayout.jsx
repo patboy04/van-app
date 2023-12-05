@@ -13,8 +13,8 @@ export default function HostLayout() {
     return (
         <>
             <div className="host--navbar">
-                <NavLink to="" style={({isActive})=> isActive ? activeLink : null} end>Vans</NavLink>
-                <NavLink to="addvans" style={({isActive})=> isActive ? activeLink : null}>Add Vans</NavLink>
+                <NavLink to="" style={({isActive})=> isActive ? activeLink : null} end>Add Vans</NavLink>
+                <NavLink to="vans" style={({isActive})=> isActive ? activeLink : null} >Vans</NavLink>   
             </div>
             <Outlet />
         </>

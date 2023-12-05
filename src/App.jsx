@@ -30,13 +30,13 @@ export default function App() {
             <Route path="vans" element={<Vans />} loader={vansLoader} errorElement={<Error />}/>
             <Route path="vans/:id" element={<VanDetail />} loader={vanDetailsLoader} errorElement={<Error />}/>
             <Route path="host" element={<HostLayout />} errorElement={<Error />} loader={async({request})=>await authenticateUser(request)}>
-                <Route index element={<HostVans />} loader={hostVansLoader} errorElement={<Error />}/>
+                <Route index element={<AddVans />} loader={async({request})=>await authenticateUser(request)}/>
+                <Route path="vans" element={<HostVans />} loader={hostVansLoader} errorElement={<Error />}/>
                 <Route path="vans/:id" element={<HostVansDetail />} loader={hostVansDetailsLoader} errorElement={<Error />}>
                     <Route index element={<HostVansInfo />} loader={async({request})=>await authenticateUser(request)} />
                     <Route path="pricing" element={<HostVansPrice />} loader={async({request})=>await authenticateUser(request)} />
                     <Route path="photos" element={<HostVansPhoto />} loader={async({request})=>await authenticateUser(request)} />
                 </Route>
-                <Route path="addvans" element={<AddVans />} loader={async({request})=>await authenticateUser(request)}/>
             </Route>
             <Route path="*" element={<NotFound />}/>
         </Route>              
