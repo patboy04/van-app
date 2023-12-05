@@ -29,12 +29,12 @@ export default function App() {
             <Route path="about" element={<About />}/>
             <Route path="login" element={<Login />} loader={loginLoader} action={loginAction}/>
             <Route path="vans" element={<Vans />} loader={vansLoader} errorElement={<Error />}/>
-            <Route path="vans/:id" element={<VanDetail />} loader={vanDetailsLoader}/>
+            <Route path="vans/:id" element={<VanDetail />} loader={vanDetailsLoader} errorElement={<Error />}/>
             <Route path="host" element={<HostLayout />} errorElement={<Error />} loader={async({request})=>await authenticateUser(request)}>
                 <Route index element={<Dashboard/>} loader={async({request})=>await authenticateUser(request)}/>
                 <Route path="income" element={<Income />} loader={async({request})=>await authenticateUser(request)}/>
-                <Route path="vans" element={<HostVans />} loader={hostVansLoader} />
-                <Route path="vans/:id" element={<HostVansDetail />} loader={hostVansDetailsLoader}>
+                <Route path="vans" element={<HostVans />} loader={hostVansLoader} errorElement={<Error />}/>
+                <Route path="vans/:id" element={<HostVansDetail />} loader={hostVansDetailsLoader} errorElement={<Error />}>
                     <Route index element={<HostVansInfo />} loader={async({request})=>await authenticateUser(request)} />
                     <Route path="pricing" element={<HostVansPrice />} loader={async({request})=>await authenticateUser(request)} />
                     <Route path="photos" element={<HostVansPhoto />} loader={async({request})=>await authenticateUser(request)} />

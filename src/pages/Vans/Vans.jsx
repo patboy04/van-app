@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { Suspense } from "react";
 import { Link, useSearchParams, useLoaderData, defer, Await } from "react-router-dom";
 import Loading from "../../component/Loading.jsx";
 import Van from "../../component/Van.jsx"
@@ -12,7 +12,6 @@ export async function loader() {
 
 export default function Vans() {
     const [searchParams, setSearchParams] = useSearchParams() //?query of url
-    //const [error, setError] = useState(null)
     const loaderData = useLoaderData()
 
     const typeFilter = searchParams.get("type")
