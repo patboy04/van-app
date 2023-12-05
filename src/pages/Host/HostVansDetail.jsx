@@ -2,11 +2,11 @@ import React, { Suspense } from "react"
 import { Link, Outlet, NavLink, useLoaderData, defer, Await } from "react-router-dom"
 import Loading from "../../component/Loading"
 import { authenticateUser } from "../../utils"
-import { getHostVans } from "../../api"
+import { getHostVans, getVanDetails } from "../../api"
 
 export async function loader({ request, params} ) {
     await authenticateUser(request)
-    const hostVansPromise = getHostVans(params.id)
+    const hostVansPromise = getVanDetails(params.id)
     return defer({hostVans: hostVansPromise})
 }
 

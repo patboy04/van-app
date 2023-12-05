@@ -24,6 +24,7 @@ createServer({
         this.urlPrefix = 'http://localhost:5173/*'
         //this.urlPrefix = 'https://vanlife-app-patrick.netlify.app/*'
         this.logging = false
+        this.passthrough("https://firestore.googleapis.com/**")
 
         this.get("/vans", (schema, request) => {
             //return new Response(400, {}, {error: "Error fetching data"})

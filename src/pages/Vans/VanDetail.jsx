@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
 import { Link, useLocation, useLoaderData, defer, Await } from "react-router-dom"
 import Loading from "../../component/Loading.jsx"
-import { getVans } from "../../api";
+import { getVanDetails, getVans } from "../../api";
 
 export async function loader({params}) {
-    const vanDetailsPromise = getVans(params.id)
+    const vanDetailsPromise = getVanDetails(params.id)
     return defer({vanDetails: vanDetailsPromise})
 }
 
