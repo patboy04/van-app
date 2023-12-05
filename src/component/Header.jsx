@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import profileIcon from "../assets/user.png"
 
 export default function Header() {
@@ -9,8 +9,9 @@ export default function Header() {
         color: "#161616"
     }
 
-    function fakeLogOut() {
+    function logOut() {
         localStorage.removeItem("loggedIn")
+        window.location.reload();
     }
 
     return (
@@ -20,8 +21,11 @@ export default function Header() {
                 <NavLink to="host" style={({isActive})=>isActive ? activeLink : null}>Host</NavLink>
                 <NavLink to="about" style={({isActive})=>isActive ? activeLink : null}>About</NavLink>
                 <NavLink to="vans" style={({isActive})=>isActive ? activeLink : null}>Vans</NavLink>
-                <NavLink to="login" ><img src={profileIcon} className="user--icon" /></NavLink>
-                <button onClick={fakeLogOut}>X</button>
+                { localStorage.getItem("loggedIn") 
+                    ? <a onClick={logOut} style={{cursor:"pointer"}}>Logout</a>
+                    : <NavLink to="login" ><img src={profileIcon} className="user--icon" /></NavLink>
+                }
+                
             </div>
         </nav>
     )

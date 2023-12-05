@@ -25,6 +25,7 @@ export async function action({ request }) {
         localStorage.setItem("loggedIn", true)
         const res = redirectTo ? redirect(redirectTo) : redirect("/host")
         res.body = true;
+        window.location.reload();
         return res
     } catch(err) {
         return err.message
