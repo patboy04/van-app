@@ -23,6 +23,13 @@ a {
     padding: 20px 30px;
 }
 
+.addVan--form--container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .host--vans-grid {
     padding: 30px;
     display: grid;

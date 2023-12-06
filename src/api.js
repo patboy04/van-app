@@ -1,14 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, doc, getDoc, query, where } from "firebase/firestore/lite"
+import { getFirestore, collection, getDocs, doc, getDoc, query, where, addDoc } from "firebase/firestore/lite"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDyNLMoi20395oKI8bogj_vN7gF4HHrLi4",
-  authDomain: "van-app-f6cd5.firebaseapp.com",
-  projectId: "van-app-f6cd5",
-  storageBucket: "van-app-f6cd5.appspot.com",
-  messagingSenderId: "1081628366416",
-  appId: "1:1081628366416:web:062ae05afe3655f8f4e355",
-  measurementId: "G-7YVT41HCPL"
+    apiKey: "AIzaSyDyNLMoi20395oKI8bogj_vN7gF4HHrLi4",
+    authDomain: "van-app-f6cd5.firebaseapp.com",
+    projectId: "van-app-f6cd5",
+    storageBucket: "van-app-f6cd5.appspot.com",
+    messagingSenderId: "1081628366416",
+    appId: "1:1081628366416:web:062ae05afe3655f8f4e355"
 };
 
 // Initialize Firebase
@@ -41,6 +40,20 @@ export async function getHostVans() {
     }))
     return vans
 }
+
+export async function addVans(object) {
+    await addDoc(collection(db, "vans"), {
+        description: object.description,
+        hostId: "123",
+        imageUrl: "https://assets.scrimba.com/advanced-react/react-router/beach-bum.png",
+        name: object.name,
+        price: object.price,
+        type: object.type 
+      });
+}
+
+//TODO IMPLEMENT REAL AUTH
+//API CALL TO FIRESTORE TO ADD VANS
 
 //MIRAGE.JS API CALLS
 // export async function getVans(id) {

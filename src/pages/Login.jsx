@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { 
     useLoaderData,
     Form,   
@@ -16,17 +16,25 @@ export function loader({ request }) {
 }
 
 export async function action({ request }) {
-    const redirectTo = new URL(request.url).searchParams.get("redirectTo") 
+    //url to redirect once logged in
+    const redirectTo = new URL(request.url).searchParams.get("redirectTo")
+
+    //form data
     const formData = await request.formData()
+    const action = formData.get("action")
     const email = formData.get("email")
     const password = formData.get("password")
+
     try {
-        const data = await loginUser({email, password})
-        localStorage.setItem("loggedIn", true)
-        const res = redirectTo ? redirect(redirectTo) : redirect("/host")
-        res.body = true;
-        window.location.reload();
-        return res
+        if(action === "login") {
+            const data = await loginUser({email, password})
+            localStorage.setItem("loggedIn", true)
+            const res = redirectTo ? redirect(redirectTo) : redirect("/host")
+            res.body = true;
+            window.location.reload();
+            return res
+        } 
+        
     } catch(err) {
         return err.message
     }
@@ -34,6 +42,7 @@ export async function action({ request }) {
 }
 
 export default function Login() {   
+    const [signup, setSignup] = useState(false)
     const error = useActionData()
     const message = useLoaderData()
     const status = useNavigation().state //Either idle or submitting
@@ -48,10 +57,15 @@ export default function Login() {
 
     return (
         <div className="login--container">
-            <h1>Sign in to your account</h1>
+            <h1>{signup ? "Sign up your account" : "Login to your account"}</h1>
             { message && <h3>{message}</h3> }
             { error && <h3>{error}</h3> }
             <Form method="post" className="login--form--container" replace={true}>
+                <input
+                    name="action"
+                    type="hidden"
+                    value={signup ? "signup" : "login"}
+                />
                 <input
                     name="email"
                     type="text"
@@ -63,9 +77,12 @@ export default function Login() {
                     placeholder="password"
                 />
                 <button disabled={status === "submitting"} className="home--main--button">
-                    {status === "submitting" ? "Logging in" : "Log in"}
+                    {status === "submitting" ? "Processing..." : "Submit"}
                 </button>
             </Form>
+            <p className={"login--signup"}onClick={() => setSignup(prevSignup => !prevSignup)}>
+                {signup ? "Already have an account? Login here" : "Don't have an account? Sign up here!"}
+            </p>
         </div>
     )
 }
