@@ -24,10 +24,17 @@ a {
 }
 
 .addVan--form--container {
-    display: flex;
-    flex-direction: column;
+    margin: 100px;
+    display: grid; 
+    grid-template-columns: 50vw; 
+    grid-template-rows: 50px 50px 50px 50px;
+    gap: 10px 5%; 
+    grid-template-areas: 
+      "."
+      "."
+      "."
+      "."; 
     justify-content: center;
-    align-items: center;
 }
 
 .host--vans-grid {
